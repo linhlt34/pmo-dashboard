@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO Dashboard - TTTV</title>
+    <!-- Tailwind CSS cho Giao diện Responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome cho Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Tùy chỉnh thanh cuộn cho bảng */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased p-4 md:p-8">
+
+    <!-- HEADER -->
+    <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 flex items-center gap-3">
+                <i class="fas fa-bullseye text-blue-600"></i>
+                PMO Dashboard: Tiến độ TTTV
+            </h1>
+            <p class="text-slate-500 mt-1 font-medium">Báo cáo cập nhật Quý 1 & Tháng 04/2026 | Ban Giám Đốc</p>
+        </div>
+        <div class="flex gap-2">
+            <span class="px-4 py-1.5 bg-blue-100 text-blue-700 font-bold rounded-full text-sm flex items-center gap-2 shadow-sm">
+                <i class="far fa-clock"></i> Cập nhật: 14/04/2026
+            </span>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+        <!-- KPI SUMMARY (RENDERED VIA JS) -->
+        <div id="kpi-summary-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Render bằng JS -->
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- CỘT TRÁI: TIẾN ĐỘ & NÚT THẮT -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- RED FLAGS -->
+                <div class="bg-white rounded-xl shadow-sm border-t-4 border-t-rose-500 border-x border-b border-slate-200 p-5 sm:p-6">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+                        <i class="fas fa-triangle-exclamation text-rose-500"></i>
+                        Vấn Đề Cần Phê Duyệt / Chỉ Đạo (Red Flags)
+                    </h2>
+                    <div id="urgent-tasks-container" class="space-y-4">
+                        <!-- Render bằng JS -->
+                    </div>
+                </div>
+
+                <!-- ON-TRACK TASKS -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+                        <i class="fas fa-tasks text-blue-500"></i>
+                        Theo Dõi Tiến Độ Tháng 4
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[500px]">
+                            <thead>
+                                <tr class="border-b border-slate-200 text-sm text-slate-500 bg-slate-50">
+                                    <th class="py-3 px-4 font-bold">Hạng mục công việc</th>
+                                    <th class="py-3 px-4 font-bold">Đầu mối</th>
+                                    <th class="py-3 px-4 font-bold">Hạn chót</th>
+                                    <th class="py-3 px-4 font-bold text-center">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="regular-tasks-container">
+                                <!-- Render bằng JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI: INSIGHTS & NHÂN SỰ -->
+            <div class="space-y-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 sm:p-6">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+                        <i class="fas fa-chart-pie text-indigo-500"></i>
+                        Phân Tích Dữ Liệu
+                    </h2>
+                    
+                    <!-- INSIGHT BOX (PMO STYLE) -->
+                    <div class="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <h4 class="text-sm font-bold text-slate-800 mb-2 flex items-center gap-2">
+                            <i class="fas fa-lightbulb text-amber-500"></i> PMO Insight:
+                        </h4>
+                        <ul class="text-sm text-slate-600 leading-relaxed space-y-2 list-disc pl-4 marker:text-slate-400">
+                            <li><strong>Biên LN Gộp:</strong> Đạt 81%, chịu áp lực trực tiếp từ sự gia tăng của chi phí vốn margin.</li>
+                            <li><strong>Dư nợ:</strong> Phân hóa rõ rệt. Có 3/10 nhân sự có tỷ lệ hoàn thành KPI Dư nợ < 100%. Mức độ tương quan giữa Mở mới và Dư nợ chưa đồng đều.</li>
+                        </ul>
+                    </div>
+
+                    <!-- STAFF DATA -->
+                    <div class="mb-6">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Nhóm KPI Phí Ròng < 110%</h3>
+                        <div id="staff-low-container" class="space-y-4">
+                            <!-- Render bằng JS -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Nhóm KPI Phí Ròng > 120%</h3>
+                        <div id="staff-high-container" class="space-y-4">
+                            <!-- Render bằng JS -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- KỊCH BẢN JAVASCRIPT: TỰ ĐỘNG CẬP NHẬT GIAO DIỆN TỪ DATA -->
+    <script>
+        // --- 1. DỮ LIỆU ĐẦU VÀO (QUÝ SAU CHỈ CẦN THAY DATA Ở ĐÂY) ---
+        const kpiSummary = [
+            { title: "Phí Giao Dịch Ròng", value: "107%", amount: "8.813 / 8.229", status: "success", icon: "fa-arrow-trend-up", note: null },
+            { title: "Mở Mới Tài Khoản", value: "99%", amount: "1.895 / 1.913", status: "success", icon: "fa-arrow-trend-up", note: null },
+            { title: "Lợi Nhuận Gộp (Q1)", value: "81%", amount: "10.597 / 13.017", status: "danger", icon: "fa-arrow-trend-down", note: "Rủi ro: Chi phí vốn margin" },
+            { title: "Thị Phần", value: "97%", amount: "0.281% / 0.290%", status: "warning", icon: "fa-arrow-trend-down", note: null }
+        ];
+
+        const tasks = [
+            { id: 10, title: "Xử lý lỗi eKYC & Ký số (161 rớt luồng, 1300 chưa ký)", pic: "TTTV, CNTT, CSSPBL", deadline: "Ngay lập tức", status: "danger" },
+            { id: 8, title: "Phê duyệt địa điểm & Kịch bản Hội thảo KH", pic: "HCNS, Hùng, Ly", deadline: "16/04 (Địa điểm)", status: "danger" },
+            { id: 4, title: "Hoàn thiện ký đánh giá KPI cá nhân", pic: "Toàn bộ TTTV", deadline: "15/04/2026", status: "warning" },
+            { id: 1, title: "Đăng tải thông tin CB lên Website", pic: "Hưng, Tập, PR", deadline: "24/04/2026", status: "warning" },
+            { id: 9, title: "Kế hoạch phát triển công cụ nội dung số", pic: "Hưng", deadline: "30/04/2026", status: "warning" },
+            { id: 2, title: "Trình URD số hóa luồng Zalo OA", pic: "Chinh, Trang, Thủ", deadline: "15/05/2026", status: "success" },
+            { id: 5, title: "Kiện toàn mô hình bán hàng (4 trưởng nhóm)", pic: "TTTV", deadline: "Đã hoàn tất", status: "success" },
+            { id: 6, title: "Ủy quyền quản lý tại HCM", pic: "Phó GĐ HCM", deadline: "Đã hoàn tất", status: "success" }
+        ];
+
+        const staffKPIs = [
+            { name: "Phạm Mạnh Hùng", phiRong: 87.7, duNo: 89.1 },
+            { name: "Nguyễn Công Thủ", phiRong: 102.5, duNo: 113.5 },
+            { name: "Lê Thị Chinh", phiRong: 104.8, duNo: 80.6 },
+            { name: "Nguyễn Thanh Thảo", phiRong: 108.6, duNo: 123.8 },
+            { name: "Nguyễn Minh Đức", phiRong: 112.8, duNo: 100.6 },
+            { name: "Lê Thị Huyền Trang", phiRong: 123.7, duNo: 93.5 },
+            { name: "Lê Bá Trực", phiRong: 125.0, duNo: 127.5 },
+            { name: "Nguyễn Bích Vân", phiRong: 126.9, duNo: 101.8 },
+            { name: "Phạm Thị Thu Hằng", phiRong: 104.5, duNo: 130.1 },
+            { name: "Trần Trang Ly", phiRong: 141.7, duNo: 98.4 },
+        ];
+
+        // --- 2. HÀM RENDER GIAO DIỆN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Render KPI Summary
+            const kpiContainer = document.getElementById('kpi-summary-container');
+            kpiSummary.forEach(kpi => {
+                let colorClass = kpi.status === 'success' ? 'border-l-emerald-500 text-emerald-600 bg-emerald-50' : 
+                                 kpi.status === 'danger' ? 'border-l-rose-500 text-rose-600 bg-rose-50' : 
+                                 'border-l-amber-500 text-amber-600 bg-amber-50';
+                
+                let noteHtml = kpi.note ? `<p class="text-xs text-rose-600 mt-3 font-semibold bg-rose-50 px-2 py-1 rounded inline-block border border-rose-100"><i class="fas fa-info-circle mr-1"></i>${kpi.note}</p>` : '';
+
+                kpiContainer.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 border-l-4 ${colorClass.split(' ')[0]} hover:shadow-md transition duration-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-semibold text-slate-500 mb-1">${kpi.title}</p>
+                                <h3 class="text-2xl font-bold text-slate-900">${kpi.value}</h3>
+                                <p class="text-xs font-medium text-slate-400 mt-1">Đạt: ${kpi.amount}</p>
+                            </div>
+                            <div class="p-2.5 rounded-lg ${colorClass.split(' ').slice(1).join(' ')}">
+                                <i class="fas ${kpi.icon} text-lg"></i>
+                            </div>
+                        </div>
+                        ${noteHtml}
+                    </div>
+                `;
+            });
+
+            // Render Urgent Tasks (Red Flags)
+            const urgentContainer = document.getElementById('urgent-tasks-container');
+            tasks.filter(t => t.status === 'danger').forEach(task => {
+                urgentContainer.innerHTML += `
+                    <div class="bg-rose-50/50 border border-rose-200 p-4 rounded-lg flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:bg-rose-50 transition">
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm md:text-base">${task.title}</h4>
+                            <div class="flex flex-wrap items-center gap-4 mt-2 text-sm">
+                                <p class="text-slate-600"><i class="far fa-user mr-1 text-slate-400"></i> <span class="font-semibold">${task.pic}</span></p>
+                                <p class="text-rose-600 font-bold"><i class="far fa-clock mr-1"></i> ${task.deadline}</p>
+                            </div>
+                        </div>
+                        <button class="w-full sm:w-auto px-4 py-2 bg-rose-600 text-white text-sm font-bold rounded-lg hover:bg-rose-700 transition shadow-sm whitespace-nowrap">
+                            Chỉ đạo ngay
+                        </button>
+                    </div>
+                `;
+            });
+
+            // Render Regular Tasks
+            const regularContainer = document.getElementById('regular-tasks-container');
+            tasks.filter(t => t.status !== 'danger').forEach(task => {
+                let badgeHtml = task.status === 'success' 
+                    ? `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200"><i class="fas fa-check"></i> Hoàn tất</span>`
+                    : `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200"><i class="fas fa-spinner fa-spin-pulse"></i> Đang xử lý</span>`;
+
+                regularContainer.innerHTML += `
+                    <tr class="border-b border-slate-100 last:border-0 hover:bg-slate-50 transition">
+                        <td class="py-3.5 px-4 text-sm font-semibold text-slate-800">${task.title}</td>
+                        <td class="py-3.5 px-4 text-sm text-slate-600">${task.pic}</td>
+                        <td class="py-3.5 px-4 text-sm font-medium text-slate-600">${task.deadline}</td>
+                        <td class="py-3.5 px-4 text-center">${badgeHtml}</td>
+                    </tr>
+                `;
+            });
+
+            // Render Staff KPIs
+            const renderStaff = (containerId, filterFn, sortFn, limit) => {
+                const container = document.getElementById(containerId);
+                let filtered = staffKPIs.filter(filterFn).sort(sortFn).slice(0, limit);
+                
+                filtered.forEach(staff => {
+                    let barColor = staff.phiRong < 100 ? 'bg-rose-500' : (staff.phiRong > 120 ? 'bg-emerald-500' : 'bg-blue-500');
+                    let textColor = staff.phiRong < 100 ? 'text-rose-600 font-bold' : (staff.phiRong > 120 ? 'text-emerald-600 font-bold' : 'text-slate-700 font-bold');
+                    
+                    container.innerHTML += `
+                        <div class="flex flex-col gap-1.5">
+                            <div class="flex justify-between text-sm">
+                                <span class="font-semibold text-slate-700">${staff.name}</span>
+                                <span class="${textColor}">${staff.phiRong}%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200/50">
+                                <div class="h-full ${barColor} rounded-full" style="width: ${Math.min(staff.phiRong, 100)}%"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            };
+
+            // Gọi hàm render staff
+            renderStaff('staff-low-container', s => s.phiRong < 110, (a, b) => a.phiRong - b.phiRong, 4);
+            renderStaff('staff-high-container', s => s.phiRong >= 120, (a, b) => b.phiRong - a.phiRong, 3);
+        });
+    </script>
+</body>
+</html>
